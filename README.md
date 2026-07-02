@@ -1,5 +1,7 @@
 # wrap-up
 
+[![check](https://github.com/alexlicohen/wrap-up/actions/workflows/check.yml/badge.svg)](https://github.com/alexlicohen/wrap-up/actions/workflows/check.yml)
+
 A [Claude Code](https://claude.com/claude-code) skill: an end-of-work checkpoint so no
 work or context is lost when you compact, clear, or start a fresh session.
 
@@ -39,3 +41,11 @@ Claude Code discovers it automatically on the next session.
 
 Personal tool, shared as-is. It adapts to each project's memory conventions and gates;
 it never fabricates a green test result or claims a push it held.
+
+`scripts/check-skill.py` (run in CI) validates the skill's structure — frontmatter and
+the five phase headers. It's a shape check, not a behavioral one: a prose skill has no
+executable surface to unit-test.
+
+## License
+
+[MIT](LICENSE) © 2026 Alexander Li Cohen
