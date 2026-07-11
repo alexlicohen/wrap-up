@@ -25,6 +25,9 @@ background agents, monitors, long-running shells, cloud/remote jobs. If somethin
 still running, WAIT for it (or, if the user wants to stop now, record what's running +
 its task id in the handoff so the resumed session can reattach). Don't checkpoint a
 moving target.
+- **Armed `usage-guard` loops don't self-terminate on job completion** — only on a trip
+  or a blind exit. If a guard is still polling, check whether the job it's watching has
+  already finished; if so, `TaskStop` it rather than leaving it running into the void.
 
 ## Phase 1 — Save memory
 Capture what a FUTURE session would need and can't re-derive from the code/git.
@@ -84,6 +87,17 @@ For EACH git repo the session changed (check the working dirs you touched, not j
    red push). If a repo has a documented "commit/push only when asked" rule, treat
    invoking this skill as the ask for COMMIT; confirm before the first PUSH unless the
    user already said push.
+   **A successful push is not the same as landed.** On a feature branch that ships via
+   PR, `git push` succeeding only means the remote branch ref moved — it says nothing
+   about whether that branch's PR already merged. A PR merged earlier in the session
+   does NOT retroactively pick up commits pushed to the branch afterward; they sit
+   orphaned on a dead branch. Before treating the repo as shipped, check the branch's PR
+   state (e.g. `gh pr view <branch> --json state,mergedAt`) and, if it's already merged,
+   confirm the latest commit is reachable from the default branch (`git merge-base
+   --is-ancestor HEAD origin/main`) rather than assuming this push landed it — if not,
+   open a new PR (or otherwise land the delta) instead of just pushing again to the same
+   branch. Treat a `not yet merged to HEAD` warning on branch delete as a hard stop to
+   investigate, never something to force past with `-D`.
 5. **Resolve downstream/mirror obligations.** If the commit touched code that is
    duplicated/mirrored/ported elsewhere (a public mirror, a sibling package, a shared
    engine), run the project's sync check (e.g. `gf sync check`) and either sync it or
@@ -95,7 +109,9 @@ For EACH git repo the session changed (check the working dirs you touched, not j
 
 ## Phase 4 — Prepare for compaction / new session
 - Confirm every touched repo is clean (no stray tracked changes) and pushed/held as
-  intended. State it plainly.
+  intended. "Pushed" means reachable from the repo's actual integration target (the
+  default branch, via a merged PR) — not just that `git push` succeeded on a feature
+  branch. State it plainly.
 - Re-confirm Phase 0: nothing is still running (or the in-flight items + task ids are in
   the handoff). Only then is it safe to clear/compact.
 - Print a tight **HANDOFF**: (a) what shipped this session, (b) what's left (point to the

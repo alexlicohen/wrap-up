@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.0 — 2026-07-10
+
+- **Phase 3/4: push ≠ landed.** A successful `git push` on a feature branch only means
+  the remote ref moved — it says nothing about whether that branch's PR already merged.
+  Root-caused against a real incident: `claude-triage-layer` PR #5 merged before its last
+  two commits landed on the branch, orphaning them until caught by chance at a later
+  `git branch -d` warning and recovered by hand (PR #9). Phase 3 step 4 and Phase 4 now
+  require checking the branch's PR state and confirming ancestry to the default branch
+  before treating a repo as shipped, and call out a `not yet merged to HEAD` delete
+  warning as a hard stop.
+- **Phase 0: armed `usage-guard` loops don't self-terminate on job completion** — only on
+  a trip or a blind exit. Added an explicit check: if the job a guard is watching has
+  already finished, stop the guard rather than leaving it polling into the void.
+
 ## 1.0.0 — 2026-07-02
 
 Initial public release of the `wrap-up` Claude Code skill.
