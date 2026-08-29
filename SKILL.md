@@ -122,4 +122,16 @@ For EACH git repo the session changed (check the working dirs you touched, not j
   starts cheaply; for a DIFFERENT project, start the new session in THAT repo's dir so
   it loads the right context. Note whether to `/compact` (keep this thread) vs `/clear`
   or a new `claude` (drop it) — a fresh context is cheaper for the next chunk.
+- **End with a RESUME PROMPT** — the last thing printed, in a single fenced code block
+  the user can copy-paste verbatim into the next (cleared) session. Write it for a
+  fresh context that has only `MEMORY.md` + `CLAUDE.md` auto-loaded — not for this
+  thread. It must be self-contained and specific: (1) the repo/dir and branch to work
+  in (and the `cd` if it differs from the session's cwd), (2) the one thing to do next,
+  phrased as a concrete task with file paths — the top backlog item, or "nothing
+  pending; await instructions" when the backlog is empty, (3) the one or two facts the
+  next session would otherwise re-derive (a decision made this session, an unverified
+  assumption to check first, a command that's known to be blocked), and (4) any gate
+  to run before/after. Plain imperative prose, ≤ ~8 lines, no headers, no pleasantries,
+  no references to "this session" or "as discussed". If a user decision is pending,
+  the prompt starts with the question so the resumed session asks it first.
 - Do NOT start new substantive work. End here.

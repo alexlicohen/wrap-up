@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 — 2026-08-29
+
+- **Phase 4: end with a copy-paste RESUME PROMPT.** The handoff used to end with a
+  "safe to /clear" line and leave the user to compose the opening message of the next
+  session by hand. Phase 4 now closes with a single fenced block written for a fresh
+  context (repo/branch, the one concrete next task with paths, the facts a new session
+  would otherwise re-derive, the gate to run) — self-contained, ≤ ~8 lines, no
+  references to the old thread; a pending user decision goes first.
+
 ## 1.1.0 — 2026-07-10
 
 - **Phase 3/4: push ≠ landed.** A successful `git push` on a feature branch only means
