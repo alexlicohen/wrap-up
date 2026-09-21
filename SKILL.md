@@ -31,19 +31,29 @@ moving target.
 
 ## Phase 1 — Save memory
 Capture what a FUTURE session would need and can't re-derive from the code/git.
-- Follow the project's memory conventions (per-project `…/memory/`: one fact per file
-  with frontmatter, a one-line pointer in `MEMORY.md`). Save: non-obvious decisions
-  and their *why*, load-bearing constraints, "we deliberately did/didn't X", state of
-  ongoing work, and any user feedback on how to work. Convert relative dates to absolute.
-- **Dedup first:** update the existing memory file that already covers a topic rather
+- **Shared save first.** Write durable facts to the project's `PROJECT_MEMORY.md` via
+  the canonical procedure (re-read, snapshot to `~/.agents/memory-snapshots/<project>/`,
+  append, keep the last ten — see `~/.agents/AGENTS.md` › Project memory for the full
+  rule). Save: non-obvious decisions and their *why*, load-bearing constraints, "we
+  deliberately did/didn't X", state of ongoing work, and any user feedback on how to
+  work. Convert relative dates to absolute.
+- **If this client is Claude Code**, optionally also mirror to its private per-project
+  memory cache (one fact per file with frontmatter, a one-line pointer in `MEMORY.md`) —
+  never as a substitute for the shared save above.
+- **Unmigrated project** (a `CLAUDE.md` but no `AGENTS.md`/`PROJECT_MEMORY.md`): don't
+  create an empty `PROJECT_MEMORY.md` as if no context existed — follow the canonical
+  "Unmigrated projects" rule and say plainly that you're working under the project's
+  legacy rules.
+- **Dedup first:** update the existing memory entry that already covers a topic rather
   than creating a near-duplicate; delete memories proven wrong.
-- Do NOT save what the repo/git/CLAUDE.md already records, or what only mattered to this
-  conversation.
+- Do NOT save what the repo/git/the project's instruction file already records, or what
+  only mattered to this conversation.
 - If memory was already kept current during the session, say so and just reconcile the
   index — don't pad.
 - **If the session changed how the project WORKS** — new tooling/commands, a new
-  convention, a danger zone, a renamed owner — update the project's `CLAUDE.md` too, not
-  just memory. Memory is recall; `CLAUDE.md` is the contract the next agent auto-loads.
+  convention, a danger zone, a renamed owner — update the project's instruction file too
+  (`AGENTS.md`, or `CLAUDE.md` in an unmigrated project), not just memory. Memory is
+  recall; the instruction file is the contract the next agent auto-loads.
 
 ## Phase 2 — Build / persist the to-do list
 - **Residue sweep** (skip with one line if the session was mechanical/docs-only):
@@ -118,20 +128,13 @@ For EACH git repo the session changed (check the working dirs you touched, not j
   Phase-2 backlog), (c) where the memory + backlog live, (d) the usage tally if the
   triage/tier layer was used (per its tally convention), and (e) residue-sweep titles, if
   any (one line each — the durable copies live in the backlog/memory).
-- Remind the resume path: a fresh session auto-loads `MEMORY.md` + `CLAUDE.md`, so it
-  starts cheaply; for a DIFFERENT project, start the new session in THAT repo's dir so
-  it loads the right context. Note whether to `/compact` (keep this thread) vs `/clear`
-  or a new `claude` (drop it) — a fresh context is cheaper for the next chunk.
-- **End with a RESUME PROMPT** — the last thing printed, in a single fenced code block
-  the user can copy-paste verbatim into the next (cleared) session. Write it for a
-  fresh context that has only `MEMORY.md` + `CLAUDE.md` auto-loaded — not for this
-  thread. It must be self-contained and specific: (1) the repo/dir and branch to work
-  in (and the `cd` if it differs from the session's cwd), (2) the one thing to do next,
-  phrased as a concrete task with file paths — the top backlog item, or "nothing
-  pending; await instructions" when the backlog is empty, (3) the one or two facts the
-  next session would otherwise re-derive (a decision made this session, an unverified
-  assumption to check first, a command that's known to be blocked), and (4) any gate
-  to run before/after. Plain imperative prose, ≤ ~8 lines, no headers, no pleasantries,
-  no references to "this session" or "as discussed". If a user decision is pending,
-  the prompt starts with the question so the resumed session asks it first.
+- Remind the resume path: a fresh session loads the project's instruction file
+  (`AGENTS.md`/`CLAUDE.md`) plus `PROJECT_MEMORY.md`, so it starts cheaply; for a
+  DIFFERENT project, start the new session in THAT repo's dir so it loads the right
+  context. Where the client has compaction, note whether to `/compact` (keep this
+  thread) vs `/clear` or a new session (drop it) — a fresh context is cheaper for the
+  next chunk.
+- **If unfinished task state remains**, use the `hand-off` skill to write the record and
+  print its pickup prompt as the last thing in this response — don't invent a second
+  resume-prompt format here. If nothing is unfinished, say so plainly instead.
 - Do NOT start new substantive work. End here.

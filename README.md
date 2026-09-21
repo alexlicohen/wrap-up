@@ -2,8 +2,9 @@
 
 [![check](https://github.com/alexlicohen/wrap-up/actions/workflows/check.yml/badge.svg)](https://github.com/alexlicohen/wrap-up/actions/workflows/check.yml)
 
-A [Claude Code](https://claude.com/claude-code) skill: an end-of-work checkpoint so no
-work or context is lost when you compact, clear, or start a fresh session.
+An end-of-work checkpoint skill so no work or context is lost when you compact, clear,
+or start a fresh session. Works with [Claude Code](https://claude.com/claude-code) and
+the Codex CLI.
 
 Invoke it by saying **"wrap up"**, "checkpoint this", "save and commit", "prepare for
 compaction", or any end-of-work save-state request.
@@ -29,13 +30,13 @@ Four phases, run in order:
 
 ## Install
 
-Clone into your Claude Code skills directory:
+Clone into your agent's skills directory:
 
 ```sh
-git clone https://github.com/alexlicohen/wrap-up.git ~/.claude/skills/wrap-up
+git clone https://github.com/alexlicohen/wrap-up.git ~/.agents/skills/wrap-up
 ```
 
-Claude Code discovers it automatically on the next session.
+Claude Code and Codex discover it automatically on the next session.
 
 ## Notes
 
