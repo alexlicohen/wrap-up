@@ -24,7 +24,8 @@ Before checkpointing, confirm nothing is mid-flight that a clear/compact would o
 background agents, monitors, long-running shells, cloud/remote jobs. If something is
 still running, WAIT for it (or, if the user wants to stop now, record what's running +
 its task id in the handoff so the resumed session can reattach). Don't checkpoint a
-moving target.
+moving target. The full list of session-end state is `~/.agents/AGENTS.md` › Session end;
+the project's own rubric may map extra state onto it.
 - **Armed `usage-guard` loops don't self-terminate on job completion** — only on a trip
   or a blind exit. If a guard is still polling, check whether the job it's watching has
   already finished; if so, `TaskStop` it rather than leaving it running into the void.
@@ -72,10 +73,10 @@ Capture what a FUTURE session would need and can't re-derive from the code/git.
   fix — except if a finding undermines a push, hold that push and say so. Dedup
   against the existing backlog; don't re-add a standing doubt every wrap-up.
 - Reconcile the in-session task list (mark done, drop stale).
-- **Persist the remaining + deferred work to memory** (a backlog memory file, or update
-  the relevant project memory) so a fresh context recalls it — the in-session task list
-  does NOT survive compaction/new sessions. Group as: in-flight (should be none after
-  Phase 3), actionable backlog, and standing/gated (with who/what gates it).
+- **Persist the durable backlog to project memory** so a fresh context recalls it — the
+  in-session task list does NOT survive compaction/new sessions. Group as: actionable
+  backlog and standing/gated (with who/what gates it). Resume state (anything still in
+  flight) goes in the handoff, not memory (`~/.agents/AGENTS.md` › Project memory).
 - Each item: one line, enough to act on cold (what + where + effort if known). Flag
   anything that needs a user decision.
 

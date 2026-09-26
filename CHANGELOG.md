@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.3.0 — 2026-09-25
+
+- **Session-end state has one owner.** Phase 0 points to `~/.agents/AGENTS.md` › Session
+  end for the full list of state to resolve or name in the handoff (running jobs, results
+  not yet applied/ingested, unpushed work in every repo, pending approvals, homeless
+  artifacts); a project's own rubric may map extra state onto it.
+- **Backlog vs resume state.** Phase 2 persists only the durable backlog (actionable,
+  standing/gated) to project memory; anything still in flight goes in the handoff, per
+  `~/.agents/AGENTS.md` › Project memory — resolving the old "in-flight to memory" wording
+  that contradicted it.
+- Records 0580a59 (2026-09-20, previously unlogged): Phase 1 saves to `PROJECT_MEMORY.md`
+  first via the canonical AGENTS.md procedure (the Claude Code memory cache is an optional
+  mirror), adds the unmigrated-project fallback, and Phase 4 defers unfinished-task resume
+  to the `hand-off` skill instead of the 1.2.0 RESUME PROMPT; invoking wrap-up with
+  unfinished work counts as the request for hand-off.
+
 ## 1.2.0 — 2026-08-29
 
 - **Phase 4: end with a copy-paste RESUME PROMPT.** The handoff used to end with a
