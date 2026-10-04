@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2 — 2026-10-04
+
+- Phase 4's printed block is a **RESUME NOTE**, so "handoff" means only the hand-off skill's record.
+
 ## 1.3.1 — 2026-10-03
 
 - Phase 3 push: a repo whose own rules forbid pushes from other sessions (engram) is

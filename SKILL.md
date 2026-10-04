@@ -128,7 +128,7 @@ For EACH git repo the session changed (check the working dirs you touched, not j
   branch. State it plainly.
 - Re-confirm Phase 0: nothing is still running (or the in-flight items + task ids are in
   the handoff). Only then is it safe to clear/compact.
-- Print a tight **HANDOFF**: (a) what shipped this session, (b) what's left (point to the
+- Print a tight **RESUME NOTE** (not the hand-off skill's record): (a) what shipped this session, (b) what's left (point to the
   Phase-2 backlog), (c) where the memory + backlog live, (d) the usage tally if the
   triage/tier layer was used (per its tally convention), and (e) residue-sweep titles, if
   any (one line each — the durable copies live in the backlog/memory).
