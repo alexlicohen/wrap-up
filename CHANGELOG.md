@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1 — 2026-10-03
+
+- Phase 3 push: a repo whose own rules forbid pushes from other sessions (engram) is
+  committed but not pushed, unless the user said push, and is listed as unpushed.
+
 ## 1.3.0 — 2026-09-25
 
 - **Session-end state has one owner.** Phase 0 points to `~/.agents/AGENTS.md` › Session

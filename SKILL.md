@@ -98,6 +98,9 @@ For EACH git repo the session changed (check the working dirs you touched, not j
    red push). If a repo has a documented "commit/push only when asked" rule, treat
    invoking this skill as the ask for COMMIT; confirm before the first PUSH unless the
    user already said push.
+   A repo whose own rules forbid pushes from other sessions (e.g. engram: only its own
+   session pushes) is committed but NOT pushed from here, unless the user said push;
+   list it as unpushed in the handoff.
    **A successful push is not the same as landed.** On a feature branch that ships via
    PR, `git push` succeeding only means the remote branch ref moved — it says nothing
    about whether that branch's PR already merged. A PR merged earlier in the session
