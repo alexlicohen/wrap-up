@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.3 — 2026-10-07
+
+- Phase 1: size check after saving; over 20 KB, trim with `memory-trim` without asking
+  (rule in `~/.agents/AGENTS.md` › Project memory).
+
 ## 1.3.2 — 2026-10-04
 
 - Phase 4's printed block is a **RESUME NOTE**, so "handoff" means only the hand-off skill's record.

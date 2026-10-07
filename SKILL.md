@@ -38,6 +38,10 @@ Capture what a FUTURE session would need and can't re-derive from the code/git.
   rule). Save: non-obvious decisions and their *why*, load-bearing constraints, "we
   deliberately did/didn't X", state of ongoing work, and any user feedback on how to
   work. Convert relative dates to absolute.
+- **Size check after saving:** `wc -c PROJECT_MEMORY.md`; over 20 KB, trim it now without
+  asking (`memory-trim <root> --dry-run`, lift still-binding lines into the digest, then
+  `memory-trim <root>`; exit 3 = consolidate by hand) per `~/.agents/AGENTS.md` › Project
+  memory.
 - **If this client is Claude Code**, optionally also mirror to its private per-project
   memory cache (one fact per file with frontmatter, a one-line pointer in `MEMORY.md`) —
   never as a substitute for the shared save above.
