@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.5 — 2026-10-18
+
+- Memory procedure references point to the `project-memory` skill (moved out of
+  `~/.agents/AGENTS.md` › Project memory).
+
 ## 1.3.4 — 2026-10-18
 
 - Phase 1: snapshot with `memory-trim <root> --snapshot` instead of a hand-rolled copy and

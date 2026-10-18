@@ -35,14 +35,13 @@ Capture what a FUTURE session would need and can't re-derive from the code/git.
 - **Shared save first.** Write durable facts to the project's `PROJECT_MEMORY.md` via
   the canonical procedure: re-read; `memory-trim <root> --snapshot` (copies and keeps the
   last ten; never hand-roll the copy or the `rm`; exit 1 = no backup taken, still save and
-  say so); append. Full rule: `~/.agents/AGENTS.md` › Project memory. Save: non-obvious
+  say so); append. Full procedure: the `project-memory` skill. Save: non-obvious
   decisions and their *why*, load-bearing constraints, "we deliberately did/didn't X",
   state of ongoing work, and any user feedback on how to work. Convert relative dates
   to absolute.
 - **Size check after saving:** `wc -c PROJECT_MEMORY.md`; over 20 KB, trim it now without
   asking (`memory-trim <root> --dry-run`, lift still-binding lines into the digest, then
-  `memory-trim <root>`; exit 3 = consolidate by hand) per `~/.agents/AGENTS.md` › Project
-  memory.
+  `memory-trim <root>`; exit 3 = consolidate by hand) per the `project-memory` skill.
 - **If this client is Claude Code**, optionally also mirror to its private per-project
   memory cache (one fact per file with frontmatter, a one-line pointer in `MEMORY.md`) —
   never as a substitute for the shared save above.
@@ -81,7 +80,7 @@ Capture what a FUTURE session would need and can't re-derive from the code/git.
 - **Persist the durable backlog to project memory** so a fresh context recalls it — the
   in-session task list does NOT survive compaction/new sessions. Group as: actionable
   backlog and standing/gated (with who/what gates it). Resume state (anything still in
-  flight) goes in the handoff, not memory (`~/.agents/AGENTS.md` › Project memory).
+  flight) goes in the handoff, not memory (`project-memory` skill).
 - Each item: one line, enough to act on cold (what + where + effort if known). Flag
   anything that needs a user decision.
 
