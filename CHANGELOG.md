@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.4 — 2026-10-18
+
+- Phase 1: snapshot with `memory-trim <root> --snapshot` instead of a hand-rolled copy and
+  `rm` loop, which the built-in rm safety check blocks (20 times, 08-30 to 10-17).
+
 ## 1.3.3 — 2026-10-07
 
 - Phase 1: size check after saving; over 20 KB, trim with `memory-trim` without asking

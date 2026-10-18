@@ -33,11 +33,12 @@ the project's own rubric may map extra state onto it.
 ## Phase 1 — Save memory
 Capture what a FUTURE session would need and can't re-derive from the code/git.
 - **Shared save first.** Write durable facts to the project's `PROJECT_MEMORY.md` via
-  the canonical procedure (re-read, snapshot to `~/.agents/memory-snapshots/<project>/`,
-  append, keep the last ten — see `~/.agents/AGENTS.md` › Project memory for the full
-  rule). Save: non-obvious decisions and their *why*, load-bearing constraints, "we
-  deliberately did/didn't X", state of ongoing work, and any user feedback on how to
-  work. Convert relative dates to absolute.
+  the canonical procedure: re-read; `memory-trim <root> --snapshot` (copies and keeps the
+  last ten; never hand-roll the copy or the `rm`; exit 1 = no backup taken, still save and
+  say so); append. Full rule: `~/.agents/AGENTS.md` › Project memory. Save: non-obvious
+  decisions and their *why*, load-bearing constraints, "we deliberately did/didn't X",
+  state of ongoing work, and any user feedback on how to work. Convert relative dates
+  to absolute.
 - **Size check after saving:** `wc -c PROJECT_MEMORY.md`; over 20 KB, trim it now without
   asking (`memory-trim <root> --dry-run`, lift still-binding lines into the digest, then
   `memory-trim <root>`; exit 3 = consolidate by hand) per `~/.agents/AGENTS.md` › Project
